@@ -1,0 +1,12 @@
+# https://hub.docker.com/layers/library/openjdk/8-jdk-alpine/images/sha256-a3562aa0b991a80cfe8172847c8be6dbf6e46340b759c2b782f8b8be45342717
+FROM openjdk:8-jdk-alpine
+
+# 设置jdk环境变量
+# 复制订单系统用到的skywalking agent包到容器
+COPY agent /java/agent/
+# 构建镜像
+# docker build -t ahao/skywalking-8.7.0-jdk8:v1 -f ./DockerfileBase .
+# 打tag标记要推送到哪个远程仓库
+# docker tag ahao/skywalking-8.7.0-jdk8:v1 harbor.ahao.moe:3443/ahao/skywalking-8.7.0-jdk8:v1
+# 真正上传镜像
+# docker push harbor.ahao.moe:3443/ahao/skywalking-8.7.0-jdk8:v1
