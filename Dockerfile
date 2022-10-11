@@ -34,13 +34,14 @@ JVM_OPTS="-server \
 -XX:HeapDumpPath=/java \
 -XX:+PrintClassHistogramBeforeFullGC \
 -XX:+PrintClassHistogramAfterFullGC \
--XX:ErrorFile=/java/hs_err_pid%p.log" \
-JAVA_TOOL_OPTIONS="-javaagent:/java/agent/skywalking-agent.jar \
--Dskywalking.collector.backend_service=${SKYWALKING_SERVER_ADDR} \
--Dskywalking.agent.service_name=${APP_NAME} \
--Dskywalking.trace.ignore_path=/actuator/**"
+-XX:ErrorFile=/java/hs_err_pid%p.log"
+# JAVA_TOOL_OPTIONS="-javaagent:/java/agent/skywalking-agent.jar \
+# -Dskywalking.collector.backend_service=${SKYWALKING_SERVER_ADDR} \
+# -Dskywalking.agent.service_name=${APP_NAME} \
+# -Dskywalking.trace.ignore_path=/actuator/**"
 
-ENTRYPOINT exec java $JVM_OPTS $JAVA_TOOL_OPTIONS \
+ENTRYPOINT exec java $JVM_OPTS \
+# $JAVA_TOOL_OPTIONS \
 -Dspring.cloud.nacos.config.server-addr=$CONFIG_SERVER_ADDR \
 -Dspring.profiles.active=$APP_ACTIVE_PROFILE -jar /java/app.jar
 
